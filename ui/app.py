@@ -1,6 +1,6 @@
 """
 InfraLens — AI-Powered Incident Post-Mortem Generator
-Pastel / Light theme edition — high contrast, readable text.
+Pastel / Light theme edition — mobile responsive fix applied.
 """
 
 import streamlit as st
@@ -31,8 +31,8 @@ html, body, [class*="css"], .stApp {
 .stApp { background: #f5f3ef; }
 #MainMenu, footer, header { visibility: hidden; }
 section[data-testid="stSidebar"] { display: none; }
-.block-container { 
-    padding: 2rem 3.5rem 5rem !important; 
+.block-container {
+    padding: 2rem 3.5rem 5rem !important;
     max-width: 1100px !important;
     margin: 0 auto !important;
 }
@@ -42,7 +42,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 ::-webkit-scrollbar-track { background: #ede9e3; }
 ::-webkit-scrollbar-thumb { background: #c4b8a8; border-radius: 3px; }
 
-/* SUBTLE PAPER TEXTURE BACKGROUND */
 .stApp::before {
     content: '';
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -53,7 +52,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     pointer-events: none; z-index: 0;
 }
 
-/* PAGE WRAPPER */
 .page { position: relative; z-index: 1; }
 
 /* NAV */
@@ -110,7 +108,7 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 }
 .hero-tag-dot { width: 4px; height: 4px; border-radius: 50%; background: #6b5fad; flex-shrink: 0; }
 .hero-h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 5vw, 3rem);
     font-weight: 700; line-height: 1.07;
     letter-spacing: -1.5px; margin-bottom: 1rem;
     color: #12100e;
@@ -125,11 +123,13 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     line-height: 1.75; max-width: 500px; margin-bottom: 1.8rem;
     font-weight: 400;
 }
+/* STATS — responsive grid from the start */
 .hero-stats {
-    display: flex; gap: 0;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    width: fit-content;
     border: 1px solid #e0d9d1;
     border-radius: 10px; overflow: hidden;
-    width: fit-content; margin-bottom: 0;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
@@ -168,33 +168,10 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     font-size: 0.78rem; font-weight: 600;
     color: #3a3530; letter-spacing: -0.1px;
 }
-.seg-control {
-    display: inline-flex;
-    background: #f0ece6;
-    border-radius: 8px;
-    padding: 3px;
-    gap: 2px;
-}
-.seg-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem; font-weight: 500;
-    color: #6b6259;
-    background: transparent;
-    border: none; border-radius: 6px;
-    padding: 5px 14px; cursor: pointer;
-    transition: all 0.12s;
-    white-space: nowrap;
-}
-.seg-btn.active {
-    background: #fff;
-    color: #1c1917;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
 .input-panel-body { padding: 1.8rem 1.8rem 1.8rem; }
 
-/* mode description strip */
 .mode-strip {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: flex-start; gap: 10px;
     background: rgba(124,111,205,0.06);
     border: 1px solid rgba(124,111,205,0.16);
     border-radius: 9px;
@@ -202,10 +179,9 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     margin-bottom: 1rem;
     font-size: 0.82rem; color: #3a3530; line-height: 1.55;
 }
-.mode-strip-icon { font-size: 1rem; flex-shrink: 0; }
+.mode-strip-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
 .mode-strip-text b { color: #5a4fa0; font-weight: 600; }
 
-/* FIELD LABEL */
 .field-label {
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem; color: #9c9189;
@@ -213,8 +189,8 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     margin-bottom: 6px;
 }
 
-/* RADIO — hide native, replaced by seg-control above */
-.stRadio > div { flex-direction: row !important; gap: 6px !important; flex-wrap: nowrap !important; }
+/* RADIO */
+.stRadio > div { flex-direction: row !important; gap: 6px !important; flex-wrap: wrap !important; }
 .stRadio label {
     color: #4a4540 !important;
     font-size: 0.85rem !important; font-weight: 500 !important;
@@ -250,7 +226,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     box-shadow: 0 0 0 3px rgba(124,111,205,0.1) !important;
 }
 
-/* FILE UPLOADER LABEL */
 [data-testid="stFileUploader"] label {
     font-family: 'DM Sans', sans-serif !important;
     font-size: 0.82rem !important;
@@ -258,8 +233,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     color: #3a3530 !important;
     margin-bottom: 6px !important;
 }
-
-/* FILE UPLOADER */
 [data-testid="stFileUploader"] {
     background: #faf8f5 !important;
     border: 1.5px dashed #d9d1c9 !important;
@@ -285,16 +258,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     font-family: 'DM Sans', sans-serif !important;
 }
 .stButton > button:hover {
-    box-shadow: 0 6px 22px rgba(124,111,205,0.38) !important;
-    transform: translateY(-1px) !important;
-}
-.stButton > button:active { transform: translateY(0) !important; }
-.stButton > button:disabled {
-    background: #e8e3dc !important;
-    color: #b5adaa !important;
-    box-shadow: none !important; transform: none !important;
-}
-.stButton > button:hover {
     box-shadow: 0 8px 28px rgba(124,111,205,0.38), inset 0 1px 0 rgba(255,255,255,0.25) !important;
     transform: translateY(-2px) !important;
 }
@@ -305,7 +268,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     box-shadow: none !important; transform: none !important;
 }
 
-/* DEMO CALLOUT */
 .demo-callout {
     border-radius: 10px;
     border: 1px solid rgba(91,179,122,0.28);
@@ -318,10 +280,8 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 }
 .demo-callout strong { color: #2d7a4d; font-weight: 600; }
 
-/* DIVIDER */
 .divider { height: 1px; background: #e0d9d1; margin: 2.5rem 0 2rem; }
 
-/* REPORT CARD — wraps tabs+content */
 .report-card {
     background: #fff;
     border: 1px solid #e8e3dc;
@@ -330,7 +290,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     margin-bottom: 1.5rem;
 }
 
-/* REPORT HEADER */
 .report-header { margin-bottom: 2rem; padding-top: 0.5rem; }
 .report-eyebrow {
     font-family: 'DM Mono', monospace;
@@ -359,8 +318,7 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 .meta-chip.conf-medium { background: rgba(222,158,65,0.1); color: #8f5e12; border: 1px solid rgba(222,158,65,0.28); }
 .meta-chip.conf-low    { background: rgba(211,70,70,0.08); color: #a02828; border: 1px solid rgba(211,70,70,0.2); }
 
-/* ROOT CAUSE */
-.rc-section { 
+.rc-section {
     margin-bottom: 2rem;
     background: #fff;
     border: 1px solid #e8e3dc;
@@ -387,7 +345,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     padding-left: 16px;
 }
 
-/* SECTION HEADING */
 .sec-heading {
     font-size: 0.6rem; font-weight: 600;
     color: #9c9189;
@@ -395,11 +352,9 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     margin-bottom: 12px; margin-top: 2rem;
     display: flex; align-items: center; gap: 10px;
     font-family: 'DM Mono', monospace;
-    padding-left: 0;
 }
 .sec-heading::after { content: ''; flex: 1; height: 1px; background: #e8e3dc; }
 
-/* FACTORS */
 .factor-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem; }
 .factor-item {
     display: flex; align-items: baseline; gap: 14px;
@@ -415,7 +370,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     text-align: right;
 }
 
-/* PATTERN TAGS */
 .ptags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
 .ptag {
     font-family: 'DM Mono', monospace;
@@ -453,7 +407,7 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 .lvl-ERROR    { color: #c05c28; }
 .lvl-WARN     { color: #a07014; }
 .lvl-INFO     { color: #b5adaa; }
-.tl-msg { color: #4a4540; font-size: 0.77rem; }
+.tl-msg { color: #4a4540; font-size: 0.77rem; word-break: break-word; }
 .tl-msg.crit { color: #1c1917; font-weight: 500; }
 .tl-msg.err  { color: #2e2b28; }
 .tl-pchip {
@@ -463,7 +417,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     vertical-align: middle;
 }
 
-/* EVIDENCE */
 .ev-wrap { display: flex; flex-direction: column; gap: 7px; margin-bottom: 1.5rem; }
 .ev-item {
     background: #faf8f5;
@@ -476,7 +429,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     line-height: 1.65; word-break: break-word;
 }
 
-/* ACTIONS */
 .action-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem; }
 .action-item {
     display: flex; gap: 14px; align-items: flex-start;
@@ -489,11 +441,11 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     font-size: 0.6rem; color: #b5adaa;
     min-width: 20px; padding-top: 3px; flex-shrink: 0;
 }
-.action-body { flex: 1; }
+.action-body { flex: 1; min-width: 0; }
 .action-what {
     font-size: 0.93rem; font-weight: 500;
     color: #1c1917; line-height: 1.5;
-    margin-bottom: 6px;
+    margin-bottom: 6px; word-break: break-word;
 }
 .action-foot { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .action-owner {
@@ -509,17 +461,15 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 .prio.P2 { background: rgba(222,158,65,0.1);  color: #8f5e12; border: 1px solid rgba(222,158,65,0.25); }
 .prio.P3 { background: rgba(91,179,122,0.1);  color: #2d7a4d; border: 1px solid rgba(91,179,122,0.22); }
 
-/* SIMILAR */
 .similar-item {
     font-family: 'DM Mono', monospace;
     font-size: 0.77rem; color: #5a4fa0;
     padding: 9px 0;
     border-bottom: 1px solid #ede9e3;
-    line-height: 1.6;
+    line-height: 1.6; word-break: break-word;
 }
 .similar-item:last-child { border-bottom: none; }
 
-/* EXPORT */
 .stDownloadButton > button {
     background: #faf8f5 !important;
     color: #3a3530 !important;
@@ -544,6 +494,7 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     border-bottom: 1px solid #e0d9d1 !important;
     gap: 0 !important;
     padding: 0 !important;
+    flex-wrap: wrap !important;
 }
 .stTabs [data-baseweb="tab"] {
     font-family: 'DM Sans', sans-serif !important;
@@ -555,36 +506,19 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     letter-spacing: -0.1px !important;
     transition: color 0.12s !important;
 }
-.stTabs [data-baseweb="tab"]:hover {
-    color: #3a3530 !important;
-    background: transparent !important;
-}
-.stTabs [aria-selected="true"] {
-    color: #1c1917 !important;
-    font-weight: 600 !important;
-    background: transparent !important;
-}
-/* Kill Streamlit's default red/any-color bottom border and replace with purple */
-.stTabs [data-baseweb="tab-highlight"] {
-    background: #7c6fcd !important;
-    height: 2px !important;
-}
-.stTabs [data-baseweb="tab-border"] {
-    background: #e0d9d1 !important;
-}
+.stTabs [data-baseweb="tab"]:hover { color: #3a3530 !important; background: transparent !important; }
+.stTabs [aria-selected="true"] { color: #1c1917 !important; font-weight: 600 !important; background: transparent !important; }
+.stTabs [data-baseweb="tab-highlight"] { background: #7c6fcd !important; height: 2px !important; }
+.stTabs [data-baseweb="tab-border"] { background: #e0d9d1 !important; }
 .stTabs [data-baseweb="tab-panel"] { padding: 1.6rem 0 0 !important; }
 
-/* MULTISELECT */
 [data-baseweb="select"] > div {
     background: #faf8f5 !important;
     border-color: #ddd6ce !important;
     border-radius: 8px !important;
 }
 [data-baseweb="select"] span { color: #3a3530 !important; }
-[data-baseweb="tag"] {
-    background: rgba(124,111,205,0.12) !important;
-    color: #5a4fa0 !important;
-}
+[data-baseweb="tag"] { background: rgba(124,111,205,0.12) !important; color: #5a4fa0 !important; }
 [data-baseweb="menu"] {
     background: #fefcfa !important;
     border: 1px solid #e0d9d1 !important;
@@ -594,17 +528,14 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
 [data-baseweb="menu"] li { color: #3a3530 !important; }
 [data-baseweb="menu"] li:hover { background: rgba(124,111,205,0.07) !important; }
 
-/* ALERTS */
 .stSuccess { background: rgba(91,179,122,0.08) !important; border-color: rgba(91,179,122,0.25) !important; color: #2d7a4d !important; border-radius: 8px !important; }
 .stInfo    { background: rgba(124,111,205,0.07) !important; border-color: rgba(124,111,205,0.22) !important; color: #5a4fa0 !important; border-radius: 8px !important; }
 .stWarning { background: rgba(222,158,65,0.08) !important; border-color: rgba(222,158,65,0.22) !important; color: #8f5e12 !important; border-radius: 8px !important; }
 .stError   { background: rgba(192,57,43,0.07) !important; border-color: rgba(192,57,43,0.2) !important; color: #a02828 !important; border-radius: 8px !important; }
 
-/* CODE BLOCKS */
 .stCodeBlock { background: #f0ece6 !important; border: 1px solid #ddd6ce !important; border-radius: 10px !important; }
 .stCodeBlock code { color: #2e2b28 !important; }
 
-/* UPLOAD PANEL */
 .upload-panel {
     background: #faf8f5;
     border: 1px solid #e0d9d1;
@@ -612,22 +543,6 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     padding: 1.4rem 1.5rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.03);
-}
-.upload-slot-header {
-    text-align: center;
-    padding: 0.5rem 0 0.7rem;
-}
-.upload-slot-icon { font-size: 1.5rem; margin-bottom: 6px; }
-.upload-slot-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.63rem; color: #6b6259;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    font-weight: 500;
-}
-.upload-slot-ext {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem; color: #7c6fcd; margin-top: 3px;
 }
 .upload-success {
     font-family: 'DM Mono', monospace;
@@ -635,15 +550,126 @@ div[data-testid="stVerticalBlock"] { gap: 0 !important; }
     text-align: center; padding: 4px 0;
     font-weight: 500;
 }
-.upload-hint {
-    border-radius: 9px;
-    border: 1px solid rgba(124,111,205,0.22);
-    background: rgba(124,111,205,0.05);
-    padding: 0.75rem 1rem;
-    font-size: 0.84rem;
-    color: #4a4540;
-    margin-top: 0.5rem;
-    line-height: 1.6;
+
+/* ══════════════════════════════════════════
+   MOBILE RESPONSIVE — all fixes below
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    /* Padding */
+    .block-container {
+        padding: 1rem 0.9rem 4rem !important;
+    }
+
+    /* Nav */
+    .nav {
+        padding: 1rem 0 0.9rem;
+        margin-bottom: 1.8rem;
+    }
+    .nav-badge {
+        font-size: 0.58rem !important;
+        padding: 4px 9px !important;
+        gap: 5px;
+    }
+    .nav-logo { font-size: 0.95rem !important; }
+
+    /* Hero */
+    .hero-h1 {
+        font-size: clamp(1.4rem, 6vw, 2rem) !important;
+        letter-spacing: -0.6px !important;
+    }
+    .hero-body { font-size: 0.85rem !important; max-width: 100% !important; }
+
+    /* Stats — 2x2 grid, full width */
+    .hero-stats {
+        grid-template-columns: 1fr 1fr !important;
+        width: 100% !important;
+    }
+    .hero-stat {
+        padding: 10px 10px !important;
+        border-right: 1px solid #e0d9d1;
+        border-bottom: 1px solid #e0d9d1;
+    }
+    .hero-stat:nth-child(2) { border-right: none !important; }
+    .hero-stat:nth-child(3) { border-bottom: none !important; }
+    .hero-stat:nth-child(4) { border-right: none !important; border-bottom: none !important; }
+    .hero-stat-num { font-size: 1.1rem !important; }
+    .hero-stat-label { font-size: 0.55rem !important; }
+
+    /* Input panel */
+    .input-panel-body { padding: 1rem 0.9rem 1rem !important; }
+    .input-panel-header { padding: 0.8rem 1rem 0.7rem !important; }
+
+    /* Mode strip */
+    .mode-strip { font-size: 0.78rem !important; }
+
+    /* Radio — wrap naturally */
+    .stRadio > div { flex-wrap: wrap !important; }
+    .stRadio label {
+        font-size: 0.78rem !important;
+        padding: 0.4rem 0.8rem !important;
+        white-space: normal !important;
+    }
+
+    /* Report */
+    .report-card { padding: 0 0.6rem 1rem !important; }
+    .report-title { font-size: 1.3rem !important; letter-spacing: -0.5px !important; }
+
+    /* Root cause */
+    .rc-section { padding: 1rem !important; }
+    .rc-headline { font-size: 0.93rem !important; }
+    .rc-body { font-size: 0.84rem !important; padding-left: 12px !important; }
+
+    /* Timeline — stack into rows instead of 4-col grid */
+    .tl-item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        padding: 8px 4px !important;
+        align-items: flex-start !important;
+    }
+    .tl-ts { font-size: 0.58rem !important; }
+    .tl-src { text-align: left !important; }
+    .tl-msg { font-size: 0.74rem !important; }
+
+    /* Tabs — allow scroll on mobile */
+    .stTabs [data-baseweb="tab-list"] {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.8rem !important;
+        white-space: nowrap !important;
+    }
+
+    /* Factors */
+    .factor-item { font-size: 0.84rem !important; gap: 10px !important; }
+
+    /* Actions */
+    .action-what { font-size: 0.84rem !important; }
+
+    /* Evidence */
+    .ev-item { font-size: 0.68rem !important; }
+
+    /* Pattern tags */
+    .ptag { font-size: 0.57rem !important; padding: 2px 6px !important; }
+
+    /* Column overflow prevention */
+    [data-testid="column"] {
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+/* Very small screens (< 420px) */
+@media (max-width: 420px) {
+    .block-container { padding: 0.75rem 0.6rem 3rem !important; }
+    .hero-h1 { font-size: 1.35rem !important; }
+    .nav-logo-icon { width: 28px !important; height: 28px !important; font-size: 10px !important; }
+    .hero-stat-num { font-size: 1rem !important; }
+    .report-title { font-size: 1.1rem !important; }
+    .rc-headline { font-size: 0.87rem !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -1004,7 +1030,7 @@ def render_report(pm, tl, iid):
             st.markdown('<div class="sec-heading">Past incidents with similar signatures</div>', unsafe_allow_html=True)
             st.markdown("".join(f'<div class="similar-item">↩  {s}</div>' for s in similar), unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True)  # close report-card
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('<div style="margin-top:1.5rem;display:flex;align-items:center;gap:8px;font-family:DM Mono,monospace;font-size:0.6rem;color:#9c9189;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Export</div>', unsafe_allow_html=True)
     ec1, ec2 = st.columns(2)
@@ -1036,7 +1062,7 @@ def render_report(pm, tl, iid):
 # ══════════════════════════════════════════════════════════════════
 st.markdown('<div class="page">', unsafe_allow_html=True)
 
-# ── NAV
+# NAV
 st.markdown("""
 <div class="nav">
   <div class="nav-logo">
@@ -1050,7 +1076,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── HERO
+# HERO
 st.markdown("""
 <div class="hero">
   <div class="hero-tag"><span class="hero-tag-dot"></span>Incident Intelligence</div>
@@ -1070,17 +1096,15 @@ st.markdown("""
 st.markdown("<div style='height:2rem'></div>", unsafe_allow_html=True)
 st.markdown('<div class="input-panel">', unsafe_allow_html=True)
 
-# Panel header row: title + segmented control (rendered as HTML; actual mode via radio below)
 st.markdown("""
 <div class="input-panel-header">
   <span class="input-panel-title">New Analysis</span>
 </div>
 """, unsafe_allow_html=True)
 
-# Actual controls inside panel body
 st.markdown('<div class="input-panel-body">', unsafe_allow_html=True)
 
-# Row 1: mode radio + incident ID side by side
+# Row 1: mode radio + incident ID
 row1_left, row1_right = st.columns([3, 1.2])
 with row1_left:
     mode = st.radio("Mode", ["⚡  Demo — pre-loaded P1 outage", "📁  Upload your own files"],
@@ -1093,7 +1117,6 @@ with row1_right:
 
 st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
 
-# Mode description strip
 if is_demo:
     st.markdown("""
 <div class="mode-strip">
@@ -1113,7 +1136,6 @@ if is_demo:
             for t in DEMO_TICKETS:
                 st.markdown(f'<div style="font-size:0.8rem;color:#1a5e99;font-family:DM Mono,monospace;padding:0.2rem 0;"><b>[{t["id"]}]</b> {t["title"]}</div>', unsafe_allow_html=True)
 
-# Upload section
 log_file = slack_file = ticket_file = None
 if not is_demo:
     st.markdown("""
@@ -1136,7 +1158,6 @@ if not is_demo:
         if ticket_file:
             st.markdown(f'<div class="upload-success">✓ {ticket_file.name}</div>', unsafe_allow_html=True)
 
-# Bottom action row: spacer + button aligned right
 st.markdown("<div style='height:1.6rem'></div>", unsafe_allow_html=True)
 
 can_run = is_demo or bool(log_file or slack_file or ticket_file)
@@ -1146,9 +1167,9 @@ btn_spacer, btn_col = st.columns([3, 1])
 with btn_col:
     generate = st.button("⚡ Generate", disabled=not can_run, use_container_width=True)
 
-st.markdown("</div></div>", unsafe_allow_html=True)  # close input-panel-body + input-panel
+st.markdown("</div></div>", unsafe_allow_html=True)
 
-# ── RUN ANALYSIS
+# RUN ANALYSIS
 if generate and can_run and incident_id.strip():
     with st.spinner("Parsing sources…"):
         sources = []
@@ -1182,12 +1203,12 @@ if generate and can_run and incident_id.strip():
     st.session_state["tl"]  = timeline
     st.session_state["iid"] = incident_id.strip()
 
-# ── RENDER REPORT
+# RENDER REPORT
 if "pm" in st.session_state:
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     render_report(st.session_state["pm"], st.session_state["tl"], st.session_state["iid"])
 
-# ── FOOTER
+# FOOTER
 st.markdown("""
 <div style="text-align:center;padding:4rem 0 2rem;
             font-family:'DM Mono',monospace;font-size:0.6rem;
