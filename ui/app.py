@@ -1111,6 +1111,12 @@ with row1_left:
                     horizontal=True, label_visibility="collapsed")
 is_demo = mode.startswith("⚡")
 
+# Clear report when mode switches
+if st.session_state.get("last_mode") != mode:
+    st.session_state.pop("pm", None)
+    st.session_state.pop("tl", None)
+    st.session_state.pop("iid", None)
+    st.session_state["last_mode"] = mode
 with row1_right:
     incident_id = st.text_input("Incident ID", value="INC-DEMO-4821" if is_demo else "",
                                 placeholder="INC-2024-001", label_visibility="collapsed")
@@ -1204,9 +1210,16 @@ if generate and can_run and incident_id.strip():
     st.session_state["iid"] = incident_id.strip()
 
 # RENDER REPORT
+# RENDER REPORT
 if "pm" in st.session_state:
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     render_report(st.session_state["pm"], st.session_state["tl"], st.session_state["iid"])
+    st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
+    if st.button("↩ New Analysis", key="reset_btn"):
+        st.session_state.pop("pm", None)
+        st.session_state.pop("tl", None)
+        st.session_state.pop("iid", None)
+        st.rerun()
 
 # FOOTER
 st.markdown("""
